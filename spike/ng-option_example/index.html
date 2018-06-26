@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <title>ng-option</title>
+  </head>
+  <body ng-controller="mainController">
+    <div>
+      <select ng-options="character.name for character in people" ng-model="selected"></select>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="mainController.js" charset="utf-8"></script>
+  </body>
+</html>
