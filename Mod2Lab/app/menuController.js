@@ -1,14 +1,10 @@
 app.controller('menuController',[
   '$scope',
   function($scope) {
-    $scope.model = {title:"our menu"};
-    $scope.changeMainDish = function(item){
-      $scope.model.mainDish = item;
+    $scope.model = {title:"our menu",mainDish:{}};
+    $scope.changeMainDish = function(itemName,price){
+      $scope.model.mainDish.title = itemName;
+      $scope.model.mainDish.price = price;
     }
-    $scope.$watch('model.mainDish',(newValue,oldValue)=>{
-      if(newValue == "Pepperoni Pizza"){
-        alert('you have Selected Pepperoni Pizza');
-      }
-    });
   }
 ])
