@@ -12,15 +12,20 @@
         <h1>Tony's Pizza</h1>
         <h2>{{model.title}}</h2>
         <h3>Topping search</h3>
-        <input type="text" class="form-control" ng-model="model.search">
+        <input ng-click="searchSucess=false" type="text" class="form-control" ng-model="model.search">
+        <pre ng-hide="!toppingAdded" style="background-color:#ceebc2">Topping added. <input ng-click="reset()" type="button" name="close" value="close"> </pre>
+        <pre style="background-color:#f2dede" ng-show="filteredToppings(model.search).length == 0" ng-if="model.search">No results</pre>
         <div ng-hide="model.search">
           Enter the search criteria above
         </div>
         <div ng-show="model.search" ng-repeat="t in model.availableToppings | filter:model.search">
           <span ng-click="addTopping(t)">{{t}}</span>
         </div>
-        <div ng-repeat="t in model.selectedToppings">
-          {{t}}
+        <div ng-if="model.selectedToppings.length>0">
+          <h3>Selected Toppings</h3>
+          <div ng-repeat="t in model.selectedToppings">
+            {{t}}
+          </div>
         </div>
     </div>
 
