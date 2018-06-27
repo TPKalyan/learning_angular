@@ -16,11 +16,6 @@ app.controller('labController', [
         $scope.model.result = message;
       };
 
-      let showRepos = (status,result)=>{
-        $scope.model.status = status;
-        $scope.model.repos = result;
-      }
-
       let checkOddNumberHandler = (number)=>{
         var defer = $q.defer();
         $timeout(function(){
@@ -31,18 +26,6 @@ app.controller('labController', [
           }
         },1000);
         return defer.promise;
-      }
-
-      let getRepos = (repoUrl)=>{
-        $scope.model.status = 'Working...';
-        $http.get(repoUrl).then(
-          (responce)=>{
-            showRepos("Success",responce.data);
-          },
-          (responce)=>{
-            showRepos('Error: '+responce.data.message,null);
-          }
-        );
       }
 
       let checkOddNumber = function(number){
@@ -56,7 +39,5 @@ app.controller('labController', [
       }
 
       $scope.checkOddNumber = checkOddNumber;
-      $scope.getRepos = getRepos;
-
     }
 ]);
