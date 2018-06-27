@@ -1,10 +1,11 @@
 app.controller('labController', [
-    '$scope','$timeout','$q',
-    function ($scope,$timeout,$q) {
+    '$scope','$timeout','$q','$http',
+    function ($scope,$timeout,$q,$http) {
 
       $scope.model = {
         number:0,
-        result:"Ready"
+        result:"Ready",
+        status:"Ready"
       }
 
       let isNumberOdd = (number)=>{
@@ -14,6 +15,11 @@ app.controller('labController', [
       let showMessage = (message)=>{
         $scope.model.result = message;
       };
+
+      let showRepos = (status,result)=>{
+        $scope.model.status = status;
+        $scope.model.repos = result;
+      }
 
       let checkOddNumberHandler = (number)=>{
         var defer = $q.defer();
@@ -27,6 +33,18 @@ app.controller('labController', [
         return defer.promise;
       }
 
+      let getRepos = (repoUrl)=>{
+        $scope.model.status = 'Working...';
+        $http.get(repoUrl).then(
+          (responce)=>{
+            showRepos("Success",responce.data);
+          },
+          (responce)=>{
+            showRepos('Error: '+responce.data.message,null);
+          }
+        );
+      }
+
       let checkOddNumber = function(number){
         $scope.model.result = 'Working...';
         checkOddNumberHandler(number).then(function(result){
@@ -37,7 +55,8 @@ app.controller('labController', [
         });
       }
 
-
       $scope.checkOddNumber = checkOddNumber;
+      $scope.getRepos = getRepos;
+
     }
 ]);
