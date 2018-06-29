@@ -1,6 +1,6 @@
 app.controller('labController', [
-    '$scope','$timeout','$q','$http','gitHub',
-    function ($scope,$timeout,$q,$http,gitHub) {
+    '$scope','$timeout','$q','$http',
+    function ($scope,$timeout,$q,$http) {
 
       $scope.model = {
         number:0,
@@ -18,11 +18,27 @@ app.controller('labController', [
       }
 
       let getRepos = (repoUrl)=>{
-        $scope.model.repos = gitHub.getAll();
+        $scope.model.status = 'Working...';
+        $scope.model.detail = "";
+        $http.get(repoUrl).then(
+          (responce)=>{
+            showRepos("Success",responce.data);
+          },
+          (responce)=>{
+            showRepos('Error: '+responce.data.message,null);
+          }
+        );
       }
 
-      let loadDetails = (name)=>{
-        $scope.model.detail = gitHub.getDetail({id:name});
+      let loadDetails = (repoURL)=>{
+        $http.get(repoURL).then(
+          (responce)=>{
+            showDetails(responce.data);
+          },
+          (responce)=>{
+            showDetails({ error: true, message: 'Error: ' + response.data.message });
+          }
+        );
       }
 
       $scope.getRepos = getRepos;
