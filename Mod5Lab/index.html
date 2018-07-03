@@ -10,47 +10,20 @@
 <body ng-controller="labController">
     <div class="container">
         <h1>New User Registration</h1>
-        <form class="form-horizontal">
-          <div class="col-md-2">
-            <label>Username</label>
-          </div>
-          <div class="col-md-5">
-            <input type="text" name="username" class="form-control">
-          </div>
-          <div class="col-md-2">
-            <label>password</label>
-          </div>
-          <div class="col-md-5">
-            <input type="text" name="password" class="form-control">
-          </div>
-          <div class="col-md-2">
-            <label for="name">Name</label>
-          </div>
-          <div class="col-md-5">
-            <input type="text" name="name" class="form-control">
-          </div>
-          <div class="col-md-2">
-            <label for="mobileNo">Mobile no</label>
-          </div>
-          <div class="col-md-5">
-            <input type="number" name="mobileNo" class="form-control">
-          </div>
-          <div class="col-md-2">
-            <label for="email">E-mail</label>
-          </div>
-          <div class="col-md-5">
-            <input type="email" name="email" class="form-control">
+        <form class="form-horizontal" ng-controller="formController">
+          <div class="fields" ng-repeat="field in fields">
+            <div class="col-md-2">
+              <label for="{{field}}">{{field}}</label>
+            </div>
+            <div class="col-md-5">
+              <input type="{{registrationFieldType[field]}}" name="{{field}}" class="form-control">
+            </div>
           </div>
           <div class="col-md-2">
             <label for="favoritePizza">Favorite Pizza</label>
           </div>
           <div class="col-md-5">
-            <select name="favoritePizza" class="form-control">
-              <option value="Cheese">Cheese Pizza</option>
-              <option value="Pepperoni">Pepperoni Pizza</option>
-              <option value="Margherita">Margherita Pizza</option>
-              <option value="BBQ_Chicken">BBQ Chicken Pizza</option>
-              <option value="BBQ Chicken">BBQ Chicken Pizza</option>
+            <select class="form-control" name="favoritePizza" ng-options="pizza for pizza in pizzaMenu" ng-model="favoritePizza">
             </select>
           </div>
           <center>
@@ -68,6 +41,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="./app/app.js"></script>
     <script src="./app/labController.js"></script>
+    <script src="./app/formController.js" charset="utf-8"></script>
 </body>
 
 </html>
