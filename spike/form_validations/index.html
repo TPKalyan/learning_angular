@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>Form validations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  </head>
+  <body ng-controller="mainController">
+    <form name="login">
+      <input name="thisName" ng-model="thisName" required>
+      <span ng-show="thisForm.thisName.$touched && thisForm.thisName.$invalid">Oops! This field is required.</span>
+      <input type='email' name='thisEmail' ng-required="{{required}}">
+      <span ng-show="thisForm.thisEmail.$touched && thisForm.thisEmail.$invalid">Oops! Please enter a valid email address.</span>
+      <button type='submit' ng-disabled='thisForm.thisName.$invalid' ng-submit='submit()'>Submit</button>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="mainController.js" charset="utf-8"></script>
+  </body>
+</html>
